@@ -11,10 +11,13 @@ export default async function Home() {
   const response = await fetch("http://localhost:3000/api/search");
   const data: any[] = await response.json();
 
+  // This only works on Server side and for SSR Pokemon table
   store.dispatch(setStartupPokemon(data));
 
   return (
     <main>
+      {/* Any data tha is pass from Server to Client is serialized */}
+      {/* Preload components will load pre data in store on client rendering */}
       <Preloader pokemons={data} />
       <Provider>
         {/* <SSRPokemonTable /> */}
